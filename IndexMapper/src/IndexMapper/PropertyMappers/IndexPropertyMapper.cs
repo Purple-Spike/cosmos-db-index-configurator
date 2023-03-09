@@ -5,11 +5,9 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 
-using Microsoft.EntityFrameworkCore;
+using PurpleSpikeProductions.CosmosDbIndexConfigurator.ConfigurationLib;
 
-using PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.ConfigurationLib;
-
-namespace PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.IndexMapper.PropertyMappers;
+namespace PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper.PropertyMappers;
 
 public class IndexPropertyMapper
 {

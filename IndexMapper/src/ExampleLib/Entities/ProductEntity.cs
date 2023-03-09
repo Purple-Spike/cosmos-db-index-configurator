@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.ConfigurationLib;
+using PurpleSpikeProductions.CosmosDbIndexConfigurator.ConfigurationLib;
 
-namespace PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.ExampleLib.Entities;
+namespace PurpleSpikeProductions.CosmosDbIndexConfigurator.ExampleLib.Entities;
 
+[IdConfiguredEntity(containerName: "Products")]
 public class ProductEntity
 {
     [IncludeIndex]

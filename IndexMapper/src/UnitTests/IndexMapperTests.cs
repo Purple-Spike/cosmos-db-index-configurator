@@ -7,17 +7,16 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.IndexMapper;
-using PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.IndexMapper.PropertyMappers;
+using PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper;
 using Shouldly;
 
 using Xunit;
 
 namespace UnitTests;
 
-public class EfCoreIndexMapperTests
+public class IndexMapperTests
 {
-    private readonly EfCoreIndexMapper _mapper = new EfCoreIndexMapper();
+    private readonly CosmosDbIndexMapper _mapper = new CosmosDbIndexMapper();
 
     [Fact]
     public void WhenLoadingTypes()
@@ -25,8 +24,7 @@ public class EfCoreIndexMapperTests
         var pwd = Directory.GetCurrentDirectory();
         var resultPath = pwd + $"/ExampleLib.dll";
         var assembly = Assembly.LoadFrom(resultPath);
-        var contextPath = "PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.ExampleLib.MyDbContext";
-        var mappedIndexes = _mapper.MapIndexes(assembly, contextPath);
+        var mappedIndexes = _mapper.MapIndexes(assembly);
 
         mappedIndexes.Length.ShouldBe(3);
 

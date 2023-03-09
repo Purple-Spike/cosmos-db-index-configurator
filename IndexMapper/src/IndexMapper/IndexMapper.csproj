@@ -2,8 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
-		<RootNamespace>PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.IndexMapper</RootNamespace>
-		<AssemblyName>PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.IndexMapper</AssemblyName>
+		<RootNamespace>PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper</RootNamespace>
+		<AssemblyName>PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper</AssemblyName>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -18,8 +18,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.*" />
-	  <PackageReference Include="PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.ConfigurationLib" Version="0.0.1-preview.*" />
+	  <PackageReference Include="PurpleSpikeProductions.CosmosDbIndexConfigurator.ConfigurationLib" Version="0.0.1-preview.3" />
 	</ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.ConfigurationLib;
+﻿using PurpleSpikeProductions.CosmosDbIndexConfigurator.ConfigurationLib;
 
 using System;
 using System.Collections;
@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 
-namespace PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.IndexMapper.PropertyMappers;
+namespace PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper.PropertyMappers;
 
 public class PartitionKeyPropertyMapper
 {

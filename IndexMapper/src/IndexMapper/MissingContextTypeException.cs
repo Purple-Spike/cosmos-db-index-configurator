@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.IndexMapper;
+namespace PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper;
 [Serializable]
 internal class MissingContextTypeException : Exception
 {

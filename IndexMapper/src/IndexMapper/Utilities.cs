@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PurpleSpikeProductions.EfCoreCosmosDbIndexConfigurator.IndexMapper;
+namespace PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper;
 public static class Utilities
 {
     public static bool IsPropertyScalar(PropertyInfo property)
