@@ -8,5 +8,5 @@ public class IdConfiguredEntityAttribute : Attribute
         ContainerName = containerName;
     }
 
-    public string ContainerName { get; set; }
+    public string ContainerName { get; }
 }
