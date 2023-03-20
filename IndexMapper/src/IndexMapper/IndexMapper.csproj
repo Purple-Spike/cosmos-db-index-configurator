@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
-		<RootNamespace>PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper</RootNamespace>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper</RootNamespace>
 		<AssemblyName>PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper</AssemblyName>
 	</PropertyGroup>
 
@@ -18,7 +18,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="PurpleSpikeProductions.CosmosDbIndexConfigurator.ConfigurationLib" Version="0.0.1-preview.4" />
+	  <PackageReference Include="PurpleSpikeProductions.CosmosDbIndexConfigurator.ConfigurationLib" Version="0.0.1-preview.7" />
 	</ItemGroup>
 
 </Project>
