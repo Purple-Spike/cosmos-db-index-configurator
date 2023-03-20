@@ -53,8 +53,7 @@ public class CosmosDbIndexMapper : ICosmosDbIndexMapper
     private ImmutableArray<MappedType> LoadClassesWithIdsToMap(Assembly assembly)
     {
         var builder = ImmutableArray.CreateBuilder<MappedType>();
-        var types = assembly.GetTypes();
-        foreach (var type in types)
+        foreach (var type in assembly.ExportedTypes)
         {
             var attr = type.GetCustomAttribute<IdConfiguredEntityAttribute>();
             if (attr is object)
