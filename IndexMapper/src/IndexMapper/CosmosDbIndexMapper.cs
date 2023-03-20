@@ -52,18 +52,25 @@ public class CosmosDbIndexMapper : ICosmosDbIndexMapper
 
     private ImmutableArray<MappedType> LoadClassesWithIdsToMap(Assembly assembly)
     {
-        return assembly.DefinedTypes
-            .Select(type =>
+        var builder = ImmutableArray.CreateBuilder<MappedType>();
+        foreach (var type in assembly.DefinedTypes)
+        {
+            try
             {
                 var attr = type.GetCustomAttribute<IdConfiguredEntityAttribute>();
                 if (attr is object)
                 {
-                    return new MappedType(type, attr.ContainerName);
+                    builder.Add(new MappedType(type, attr.ContainerName));
                 }
-                return null;
-            }).Where(x => x is object)
-            .Select(x => x!)
-            .ToImmutableArray();
+
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                Console.WriteLine($"Error reflecting the {type.AssemblyQualifiedName} assembly. {ex.Message}");
+            }
+        }
+
+        return builder.ToImmutableArray();
     }
 
     private record MappedType(TypeInfo Type, string ContainerName);

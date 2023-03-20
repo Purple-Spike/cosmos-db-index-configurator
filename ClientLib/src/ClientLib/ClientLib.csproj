@@ -18,7 +18,4 @@
 		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 
-	<ItemGroup>
-	</ItemGroup>
-
 </Project>
