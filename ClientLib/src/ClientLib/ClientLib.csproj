@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>PurpleSpikeProductions.CosmosDbIndexConfigurator.ConfigurationLib</RootNamespace>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>PurpleSpikeProductions.CosmosDbIndexConfigurator.ConfigurationLib</RootNamespace>
 		<AssemblyName>PurpleSpikeProductions.CosmosDbIndexConfigurator.ConfigurationLib</AssemblyName>
 	</PropertyGroup>
 
