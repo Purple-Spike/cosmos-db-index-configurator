@@ -24,8 +24,9 @@ public class IndexMapperTests
         var pwd = Directory.GetCurrentDirectory();
         var resultPath = pwd + $"/ExampleLib.dll";
         var assembly = Assembly.LoadFrom(resultPath);
-        var mappedIndexes = _mapper.MapIndexes(assembly);
+        var result = _mapper.MapIndexes(assembly);
 
+        var mappedIndexes = result.Indexes;
         mappedIndexes.Length.ShouldBe(3);
 
         var customersContainer = mappedIndexes.Single(x => x.ContainerName == "Customers");

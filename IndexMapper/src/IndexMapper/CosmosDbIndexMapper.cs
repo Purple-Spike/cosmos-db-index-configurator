@@ -5,33 +5,29 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 
+using ProgrammerAl.SourceGenerators.PublicInterfaceGenerator.Attributes;
+
 using PurpleSpikeProductions.CosmosDbIndexConfigurator.ConfigurationLib;
 using PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper.PropertyMappers;
 
 namespace PurpleSpikeProductions.CosmosDbIndexConfigurator.IndexMapper;
 
-public interface ICosmosDbIndexMapper
-{
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="assembly">Assembly to load from</param>
-    ImmutableArray<MappedIndexes> MapIndexes(Assembly assembly);
-}
+public record CosmosDbIndexMap(ImmutableArray<MappedIndexes> Indexes, ImmutableArray<AttributeLoadError> LoadErrors);
+public record AttributeLoadError(Type TypeErroredOn, Exception Exception);
 
+[GenerateInterface]
 public class CosmosDbIndexMapper : ICosmosDbIndexMapper
 {
     private readonly IndexPropertyMapper _indexMapper = new IndexPropertyMapper();
     private readonly PartitionKeyPropertyMapper _partitionKeyMapper = new PartitionKeyPropertyMapper();
 
-    /// <summary>
-    /// 
-    /// </summary>
     /// <param name="assembly">Assembly to load from</param>
-    public ImmutableArray<MappedIndexes> MapIndexes(Assembly assembly)
+    public CosmosDbIndexMap MapIndexes(Assembly assembly)
     {
-        var typesWithIdsToMap = LoadClassesWithIdsToMap(assembly);
-        return LoadMappedIndexesFromDbSetProperties(typesWithIdsToMap);
+        var (typesWithIdsToMap, loadErrors) = LoadClassesWithIdsToMap(assembly);
+        var mappedIndexes = LoadMappedIndexesFromDbSetProperties(typesWithIdsToMap);
+
+        return new CosmosDbIndexMap(mappedIndexes, loadErrors);
     }
 
     private ImmutableArray<MappedIndexes> LoadMappedIndexesFromDbSetProperties(ImmutableArray<MappedType> typesToMap)
@@ -50,19 +46,27 @@ public class CosmosDbIndexMapper : ICosmosDbIndexMapper
         return builder.MoveToImmutable();
     }
 
-    private ImmutableArray<MappedType> LoadClassesWithIdsToMap(Assembly assembly)
+    private static (ImmutableArray<MappedType>, ImmutableArray<AttributeLoadError>) LoadClassesWithIdsToMap(Assembly assembly)
     {
-        var builder = ImmutableArray.CreateBuilder<MappedType>();
+        var mappedTypesBuilder = ImmutableArray.CreateBuilder<MappedType>();
+        var errorsBuilder = ImmutableArray.CreateBuilder<AttributeLoadError>();
         foreach (var type in assembly.ExportedTypes)
         {
-            var attr = type.GetCustomAttribute<IdConfiguredEntityAttribute>();
-            if (attr is object)
+            try
             {
-                builder.Add(new MappedType(type, attr.ContainerName));
+                var attr = type.GetCustomAttribute<IdConfiguredEntityAttribute>();
+                if (attr is object)
+                {
+                    mappedTypesBuilder.Add(new MappedType(type, attr.ContainerName));
+                }
+            }
+            catch (Exception ex)
+            {
+                errorsBuilder.Add(new AttributeLoadError(type, ex));
             }
         }
 
-        return builder.ToImmutableArray();
+        return (mappedTypesBuilder.ToImmutableArray(), errorsBuilder.ToImmutableArray());
     }
 
     private record MappedType(Type Type, string ContainerName);
